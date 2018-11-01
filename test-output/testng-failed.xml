@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite thread-count="2" name="Failed suite [kindleTesting]" parallel="methods">
+  <test name="testngTest(failed)" parallel="methods">
+    <classes>
+      <class name="amazon.assignment.test.KindleTest">
+        <methods>
+          <include name="kindleTest2"/>
+          <include name="closeBrowser"/>
+          <include name="initateDriver"/>
+        </methods>
+      </class> <!-- amazon.assignment.test.KindleTest -->
+    </classes>
+  </test> <!-- testngTest(failed) -->
+</suite> <!-- Failed suite [kindleTesting] -->
