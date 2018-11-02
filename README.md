@@ -1,88 +1,46 @@
 # Project Title
 
-One Paragraph of project description goes here
+Sample script for amazon kindle item verficartion
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+Before executing the script we have to set up for appium in our local machine ,then add all required  jar to project
+ 
 
 ### Prerequisites
 
-What things you need to install the software and how to install them
+Appium Desktop - https://github.com/appium/appium-desktop/releases/latest
+Android Studio (Allows you to install SDK and Emulators) - https://developer.android.com/studio/index.html
+XCode - https://developer.apple.com/xcode/
 
-```
-Give examples
-```
 
 ### Installing
 
-A step by step series of examples that tell you how to get a development env running
-
-Say what the step will be
-
-```
-Give the example
-```
-
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
+Install All required software like appium ,sdk,appium studio and  then set up below paths.
+Supported System PropertiesAnd
+pathToAppFile - The location of the .ipa/.apk file to use in testing
+device.id - The device ID of a real device to run tests against (If it is an iOS device, this must be registered in your iOS developer account)
+enableDebugMode - Will set the Appium timeout to 1 hour so that the server doesn't close down while you are trying to debug your tests
 
 ## Running the tests
 
-Explain how to run the automated tests for this system
+Before running the script make sure below settings to be done :
+Android Configuration settings
+General Settings
+Starting Node server 
+Then execute our script in test package using testNG.
 
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
+In Kindle test scenario validate kindle devices are available for buy or not .
 
 ```
-Give an example
-```
 
-## Deployment
+### Frame work Implementation
+ develop Hybrid framework combination of Page object model and data driven .
+ 
+created 3 packages for pages ,flows and test .
 
-Add additional notes about how to deploy this on a live system
+In pages package defined all page method and locators ,
+In flow packages have  created classes for  combination of pages 
 
-## Built With
-
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
-
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
-
-## Authors
-
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
-## Acknowledgments
-
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
-
+### Reports 
+we can see test results in testng out put folder .
