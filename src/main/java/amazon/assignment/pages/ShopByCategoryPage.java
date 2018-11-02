@@ -7,14 +7,15 @@ import org.openqa.selenium.By;
 import amazon.assignment.util.HelperPage;
 import amazon.assignment.util.MobileBasePage;
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.android.AndroidElement;
 
 public class ShopByCategoryPage extends MobileBasePage{
-	private AndroidDriver Driver=null;
+	private AndroidDriver driver=null;
 	private String testName="";
 	private final By KINDLE=By.xpath("//a[text()='Kindle E-Readers & eBooks']");
 	private final By KINDLEBOOK=By.xpath("//a[text()='Kindle E-Readers & eBooks']");
-	public ShopByCategoryPage(AndroidDriver Driver, String testName) {
-		this.Driver=Driver;
+	public ShopByCategoryPage(AndroidDriver<AndroidElement> driver, String testName) {
+		this.driver=driver;
 		this.testName=testName;
 		waitForPageLoad();
 	}
@@ -25,16 +26,16 @@ public class ShopByCategoryPage extends MobileBasePage{
 	 * @throws IOException
 	 */
 	public ShopByCategoryPage clickKindleLink() throws IOException {
-		Driver.findElement(KINDLE).click();
+		driver.findElement(KINDLE).click();
 		return this;
 	}
 	/**
-	 * method to click Kindle
+	 * method to click Kindle search
 	 * @return
 	 * @throws IOException
 	 */
 	public ShopByCategoryPage SelectKindleEreadersKindleLink() throws IOException {
-		Driver.findElement(KINDLEBOOK).click();
+		driver.findElement(KINDLEBOOK).click();
 		return this;
 	}
 	@Override

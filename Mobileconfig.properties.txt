@@ -1,0 +1,6 @@
+appium-version		:
+platformName		:
+deviceName		:
+appPackage		:
+appActivity		:
+app			

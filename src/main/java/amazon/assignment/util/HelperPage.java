@@ -4,13 +4,19 @@ package amazon.assignment.util;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Properties;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.By;
@@ -26,16 +32,28 @@ import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import org.openqa.selenium.Capabilities;
+import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.android.AndroidElement;
+
 public class HelperPage {
-	static WebDriver webDriver;
+	
+	static AndroidDriver<AndroidElement> driver;
 	static String filePath="src/main/java/amazon/assignment/data";
 	static String sheetName="TestData";
+	private final DesiredCapabilities capabilities = new DesiredCapabilities();
+	public Capabilities buils ()
+	{
+		return capabilities;
+	}
 	/**
 	 * method to set Enviroment
 	 * To be called in @BeforeClass
 	 * @return 
 	 * @return 
 	 */
+	
+	
 	public static WebDriver setEnvironment(WebDriver webDriver,String BrowserName ) { 
 		
 		if (BrowserName.equalsIgnoreCase("Chrome"))
@@ -64,6 +82,50 @@ public class HelperPage {
 			System.out.println("Please select proper browser");
 		}
 		return webDriver;
+		
+	}
+	
+	
+	
+	
+	
+	
+	public static Map<String, Object> formfile(File file)
+	{
+		try 
+		{
+		return fromStreams(new FileInputStream(file));	
+		}
+		catch(FileNotFoundException  e)
+		{
+			throw new RuntimeException(e);
+			
+		}
+	}
+	
+	public static Map<String, Object> fromStreams(InputStream is)
+	{
+		try 
+		{
+			Properties properties = new Properties();
+			properties.load(is);
+			is.close();
+		return fromProperties(properties);	
+		}
+		catch(IOException  e)
+		{
+			throw new RuntimeException(e);
+			
+		}
+	}
+	public static Map<String, Object> fromProperties(Properties properties)
+	{
+		Map<String, Object> map = new HashMap<>(properties.size());
+		for (Object Key: properties.keySet())
+		{
+			map.put((String) Key,properties.getProperty( (String) Key));
+		}
+		return map;
 		
 	}
 	/**
@@ -109,29 +171,7 @@ public class HelperPage {
 		String value=Integer.toString(d);
 		return value;
 	}
-	public static DesiredCapabilities Runcababilities(String testName) throws IOException 
-	{
-		File classpathRoot = new File(System.getProperty("user.dir"));
-		File appDir = new File(classpathRoot, "/Apps/Amazon/");
-		File app = new File(appDir, "in.amazon.mShop.android.shopping.apk");
-		String devicename = HelperPage.readData(testName,"devicename");
-		String Appiumversion = HelperPage.readData(testName,"Appiumversion");
-		String Platform = HelperPage.readData(testName,"Platform");
-		String appPackage = HelperPage.readData(testName,"appPackage");
-		String appActivity = HelperPage.readData(testName,"appActivity");
-				DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability("appium-version", Appiumversion);
-        capabilities.setCapability("platformName", Platform);
-        capabilities.setCapability("deviceName", devicename);
-        capabilities.setCapability("appPackage", appPackage );
-        capabilities.setCapability("appActivity", appActivity);
-         
-        capabilities.setCapability("app", app);
-		
-		
-		return capabilities;
-		
-	}
+	
 	/**
 	 * Reading date from Excel based on Column Name 
 	 * @param fileName
@@ -156,6 +196,26 @@ public class HelperPage {
 		return value;
 	}
 	
+	
+	
+	public static HelperPage   setAll(Map<String,Object> devicePropeties)
+	{
+		for(String key: devicePropeties.keySet())
+		{
+			String value =(String) devicePropeties.get(key);
+			if(StringUtils.equalsIgnoreCase(value,"true")||StringUtils.equalsIgnoreCase(value,"false"));
+			{
+				Capabilities.setCapability(key,Boolean.parseBoolean(value));
+			}
+			else	
+			{
+				Capabilities.setCapability(key,value);
+			}
+			
+		}
+		
+		
+	}
 	/**
 	 * Reading data from Excel based on Column Name
 	 * @param fileName
@@ -213,7 +273,7 @@ public class HelperPage {
 	 */
 	public static void waitForPageLoad(By element) {
 		try {
-			WebDriverWait wait=new WebDriverWait(webDriver,40);
+			WebDriverWait wait=new WebDriverWait(driver,40);
 			wait.until(ExpectedConditions.presenceOfElementLocated(element));
 		}catch(Exception e){
 			e.printStackTrace();

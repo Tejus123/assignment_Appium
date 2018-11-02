@@ -7,14 +7,15 @@ import org.openqa.selenium.By;
 import amazon.assignment.util.HelperPage;
 import amazon.assignment.util.MobileBasePage;
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.android.AndroidElement;
 
 public class AmazonHomePage extends MobileBasePage{
-	private AndroidDriver Driver=null;
+	private AndroidDriver<AndroidElement> driver=null;
 	private String testName="";
 	private final By HAMBURGERMENU =By.xpath("//*[@text='Show Navigation Menu']");
 	private final By CATEGORY =By.xpath("//*[@text='Shap by Category']");
-	public AmazonHomePage(AndroidDriver Driver, String testName) {
-		this.Driver=Driver;
+	public AmazonHomePage(AndroidDriver<AndroidElement> driver, String testName) {
+		this.driver=driver;
 		this.testName=testName;
 		waitForPageLoad();
 	}
@@ -25,12 +26,18 @@ public class AmazonHomePage extends MobileBasePage{
 	 * @throws IOException
 	 */
 	public AmazonHomePage clickShopByDepartment() throws IOException {
-		Driver.findElement(HAMBURGERMENU).click();
+		driver.findElement(HAMBURGERMENU).click();
 		
 		return this;
 	}
+	/**
+	 * method to click on category
+	 * @return
+	 * @throws IOException
+	 */
+	
 	public AmazonHomePage ClickOnCategoty() {
-		Driver.findElement(CATEGORY).click();
+		driver.findElement(CATEGORY).click();
 		return this;
 	}
 	@Override

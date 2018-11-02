@@ -14,9 +14,10 @@ import amazon.assignment.util.HelperPage;
 import amazon.assignment.util.MobileBasePage;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.android.AndroidElement;
 
 public class KindlePaperWhiteHomePage extends MobileBasePage{
-	private AppiumDriver Driver=null;
+	private AppiumDriver driver=null;
 	private String testName="";
 	private final By QUANTITY=By.id("quantity");
 	private final By KINDLEREADEBLACK=By.xpath("//a[text()='Kindle E-Readers - Black,6 Glare-Free Touchscreen Display,wi - fi']");
@@ -24,8 +25,8 @@ public class KindlePaperWhiteHomePage extends MobileBasePage{
 	
 	private final By CLOSE=By.xpath("//text[@aria-label='Close']");
 	
-	public KindlePaperWhiteHomePage(AppiumDriver Driver, String testName) {
-		this.Driver = Driver;
+	public KindlePaperWhiteHomePage(AndroidDriver<AndroidElement> driver, String testName) {
+		this.driver = driver;
 		this.testName=testName;
 		waitForPageLoad();
 	}
@@ -35,20 +36,20 @@ public class KindlePaperWhiteHomePage extends MobileBasePage{
 	 * @throws IOException
 	 */
 	public KindlePaperWhiteHomePage VerifyKidledevice() throws IOException {
-		Driver.findElement(KINDLEREADEBLACK).click();
-		Dimension size = Driver.manage().window().getSize();
+		driver.findElement(KINDLEREADEBLACK).click();
+		Dimension size = driver.manage().window().getSize();
 		int starty=(int)(size.height.5);
 		int endy=(int)(size.height.2);
 		int startx=size.width/2;
-		Driver.swipe(startx,endy,startx,starty,2000);
-		Assert.assertTrue("Buy Now is not displayed", Driver.findElement(BUYNOW).isDisplayed());
+		driver.swipe(startx,endy,startx,starty,2000);
+		Assert.assertTrue("Buy Now is not displayed", driver.findElement(BUYNOW).isDisplayed());
 	}	
 	
 	
 	
 	@Override
 	public void waitForPageLoad() {
-		HelperPage.waitForPageLoad(ADDTOCART);
+		HelperPage.waitForPageLoad(KINDLEREADEBLACK);
 	}
 	
 }
