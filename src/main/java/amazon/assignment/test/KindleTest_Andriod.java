@@ -24,9 +24,9 @@ public class KindleTest_Andriod{
 	@BeforeTest
 	public void initateDriver() throws IOException {
 		
-		Map<String, Object> phone = HelperPage.formfile(new File("Mobileconfig.properties"));
+		Map<String, Object> deviceProperties = HelperPage.formfile(new File("Mobileconfig.properties"));
 	
-		Capabilities capabilities = HelperPage.setAll(phone).buils();
+		Capabilities capabilities = HelperPage.setAll(deviceProperties).build();
 		driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
 		driver.manage().timeouts().implicitlyWait(80, TimeUnit.SECONDS);
 		

@@ -36,7 +36,7 @@ public class AmazonHomePage extends MobileBasePage{
 	 * @throws IOException
 	 */
 	
-	public AmazonHomePage ClickOnCategoty() {
+	public AmazonHomePage clickOnCategoty() {
 		driver.findElement(CATEGORY).click();
 		return this;
 	}

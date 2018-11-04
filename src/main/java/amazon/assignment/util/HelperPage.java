@@ -42,7 +42,7 @@ public class HelperPage {
 	static String filePath="src/main/java/amazon/assignment/data";
 	static String sheetName="TestData";
 	private final DesiredCapabilities capabilities = new DesiredCapabilities();
-	public Capabilities buils ()
+	public Capabilities build ()
 	{
 		return capabilities;
 	}

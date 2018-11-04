@@ -35,7 +35,7 @@ public class KindlePaperWhiteHomePage extends MobileBasePage{
 	 * method to Click Kindle device	 * @return
 	 * @throws IOException
 	 */
-	public KindlePaperWhiteHomePage VerifyKidledevice() throws IOException {
+	public KindlePaperWhiteHomePage verifyKidledevice() throws IOException {
 		driver.findElement(KINDLEREADEBLACK).click();
 		Dimension size = driver.manage().window().getSize();
 		int starty=(int)(size.height.5);

@@ -34,7 +34,7 @@ public class ShopByCategoryPage extends MobileBasePage{
 	 * @return
 	 * @throws IOException
 	 */
-	public ShopByCategoryPage SelectKindleEreadersKindleLink() throws IOException {
+	public ShopByCategoryPage selectKindleEreadersKindleLink() throws IOException {
 		driver.findElement(KINDLEBOOK).click();
 		return this;
 	}
